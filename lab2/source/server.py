@@ -28,7 +28,10 @@ class web_server(http.server.SimpleHTTPRequestHandler):
                 time = datetime.now().strftime("%H:%M:%S")
                 self.wfile.write(str.encode(time))
             elif cmd == 'rev':
-                str_to_rev = parse.parse_qs(parse.urlparse(self.path).query)['str'][0]
+                try:
+                    str_to_rev = parse.parse_qs(parse.urlparse(self.path).query)['str'][0]
+                except:
+                    str_to_rev = ''
                 reversed_str = str_to_rev[::-1]
                 self.wfile.write(str.encode(reversed_str))
         except:
