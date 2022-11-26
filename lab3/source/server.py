@@ -18,24 +18,29 @@ class web_server(http.server.SimpleHTTPRequestHandler):
         self.protocol_version = 'HTTP/1.1'
         self.send_response(200)
         self.send_header("Content-type", "text/html; charset=UTF-8")
-        self.end_headers()            
+        self.end_headers()  
+
+        string = parse.parse_qs(parse.urlparse(self.path).query)['str'][0]
+        self.wfile.write(str.encode(string))
+
+
         
 
-        try:
-            cmd = parse.parse_qs(parse.urlparse(self.path).query)['cmd'][0]
-        # self.wfile.write(str.encode(param))
-            if cmd == 'time':
-                time = datetime.now().strftime("%H:%M:%S")
-                self.wfile.write(str.encode(time))
-            elif cmd == 'rev':
-                try:
-                    str_to_rev = parse.parse_qs(parse.urlparse(self.path).query)['str'][0]
-                except:
-                    str_to_rev = ''
-                reversed_str = str_to_rev[::-1]
-                self.wfile.write(str.encode(reversed_str))
-        except:
-            self.wfile.write(b"Hello World!\n")
+        # try:
+        #     cmd = parse.parse_qs(parse.urlparse(self.path).query)['cmd'][0]
+        # # self.wfile.write(str.encode(param))
+        #     if cmd == 'time':
+        #         time = datetime.now().strftime("%H:%M:%S")
+        #         self.wfile.write(str.encode(time))
+        #     elif cmd == 'rev':
+        #         try:
+        #             str_to_rev = parse.parse_qs(parse.urlparse(self.path).query)['str'][0]
+        #         except:
+        #             str_to_rev = ''
+        #         reversed_str = str_to_rev[::-1]
+        #         self.wfile.write(str.encode(reversed_str))
+        # except:
+        #     self.wfile.write(b"Hello World!\n")
 
 
 
