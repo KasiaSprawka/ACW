@@ -6,6 +6,7 @@ from datetime import datetime
 # from urllib.parse import urlparse
 # from urllib.parse import parse_qs
 from urllib import parse
+import json
 
 #print('source code for "http.server":', http.server.__file__)
 
@@ -21,16 +22,17 @@ class web_server(http.server.SimpleHTTPRequestHandler):
         self.end_headers()  
 
         string = parse.parse_qs(parse.urlparse(self.path).query)['str'][0]
-        self.wfile.write(str.encode(string))
 
         letters = [*string]
 
-        # lowercase = 
+        lowercase = len([letter for letter in letters if letter.islower()])
         uppercase = len([letter for letter in letters if letter.isupper()])
-        # digits = 
-        # special = 
+        digits = 0
+        special = 0
 
-        self.wfile.write(str.encode(str(uppercase)))
+        response = { "lowercase" : lowercase, "uppercase" : uppercase, "digits" : digits, "special" : special}
+
+        self.wfile.write(str.encode(json.dumps(response)))
 
 
         
