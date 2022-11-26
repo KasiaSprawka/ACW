@@ -23,6 +23,15 @@ class web_server(http.server.SimpleHTTPRequestHandler):
         string = parse.parse_qs(parse.urlparse(self.path).query)['str'][0]
         self.wfile.write(str.encode(string))
 
+        letters = [*string]
+
+        # lowercase = 
+        uppercase = len([letter for letter in letters if letter.isupper()])
+        # digits = 
+        # special = 
+
+        self.wfile.write(str.encode(str(uppercase)))
+
 
         
 
