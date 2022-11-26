@@ -27,8 +27,8 @@ class web_server(http.server.SimpleHTTPRequestHandler):
 
         lowercase = len([letter for letter in letters if letter.islower()])
         uppercase = len([letter for letter in letters if letter.isupper()])
-        digits = 0
-        special = 0
+        digits = len([letter for letter in letters if letter.isdigit()])
+        special = len(letters) - (lowercase + uppercase + digits)
 
         response = { "lowercase" : lowercase, "uppercase" : uppercase, "digits" : digits, "special" : special}
 
