@@ -21,7 +21,10 @@ class web_server(http.server.SimpleHTTPRequestHandler):
         self.send_header("Content-type", "text/html; charset=UTF-8")
         self.end_headers()  
 
-        string = parse.parse_qs(parse.urlparse(self.path).query)['str'][0]
+        try:
+            string = parse.parse_qs(parse.urlparse(self.path).query)['str'][0]
+        except:
+            string = ''
 
         letters = [*string]
 
