@@ -3,12 +3,9 @@ import http.server
 import socketserver
 import os
 from datetime import datetime
-# from urllib.parse import urlparse
-# from urllib.parse import parse_qs
 from urllib import parse
 import json
 
-#print('source code for "http.server":', http.server.__file__)
 
 class web_server(http.server.SimpleHTTPRequestHandler):
     
@@ -37,30 +34,6 @@ class web_server(http.server.SimpleHTTPRequestHandler):
 
         self.wfile.write(str.encode(json.dumps(response)))
 
-
-        
-
-        # try:
-        #     cmd = parse.parse_qs(parse.urlparse(self.path).query)['cmd'][0]
-        # # self.wfile.write(str.encode(param))
-        #     if cmd == 'time':
-        #         time = datetime.now().strftime("%H:%M:%S")
-        #         self.wfile.write(str.encode(time))
-        #     elif cmd == 'rev':
-        #         try:
-        #             str_to_rev = parse.parse_qs(parse.urlparse(self.path).query)['str'][0]
-        #         except:
-        #             str_to_rev = ''
-        #         reversed_str = str_to_rev[::-1]
-        #         self.wfile.write(str.encode(reversed_str))
-        # except:
-        #     self.wfile.write(b"Hello World!\n")
-
-
-
-
-        # else:
-        #     super().do_GET()
     
 # --- main ---
 
